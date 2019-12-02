@@ -12,10 +12,24 @@ export const getFilteredTrips = ({trips, filters}) => {
   }
 
   // TODO - filter by duration
+  if (filters.duration) {
+    output = output.filter(trip => trip.days >= filters.duration.from && trip.days <= filters.duration.to);
+  }
 
   // TODO - filter by tags
+  if (filters.tags) {
+    output = output.filter(trip => filters.tags.every(tag => trip.tags.includes(tag)));
+  }
 
   // TODO - sort by cost descending (most expensive goes first)
+  //let tripPrices = output.map(a => a.cost);
+  //for (var i=0; i<output.length; i++) {
+  //  output[i].cost = output[i].cost.split('').filter(symbol => !isNaN(symbol)).join('');
+  //  console.log('split executed');
+  //}
+  //console.log('tripsPrices: ', output.map(a => a.cost));
+  output.sort((a, b) => b.cost.split('').filter(symbol => !isNaN(symbol)).join('') - a.cost.split('').filter(symbol => !isNaN(symbol)).join(''));
+  //console.log('tripsPricesSorted: ', tripPricesSorted);
 
   return output;
 };
