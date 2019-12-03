@@ -4,6 +4,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
+import styles from './App';
 
 import Home from './components/views/Home/Home';
 import Trips from './components/views/Trips/TripsContainer';
@@ -44,10 +45,15 @@ class App extends React.Component {
         <MainLayout>
           <AnimatedSwitch
             location={location}
-            atEnter={{ opacity: 0 }}
+            atEnter={{ opacity: 0, offset: 200 }}
             atLeave={{ opacity: 0 }}
-            atActive={{ opacity: 1 }}
-            className='switch-wrapper'
+            atActive={{ opacity: 1, offset: 0 }}
+            className={styles.switchWrapper}
+            mapStyles = {styles => ({
+              opacity: styles.opacity,
+              transform: `translateY(${styles.offset}px)`,
+            })
+            }
           >
             <Route exact path='/' component={Home} />
             <Route exact path='/trips' component={Trips} />
