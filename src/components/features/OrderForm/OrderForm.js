@@ -9,14 +9,17 @@ import OrderOption from '../OrderOption/OrderOption';
 
 const OrderForm = props => (
   <Grid>
+    <PageTitle text='Trip options' />
     <Row>
       {pricing.map(option => (
         <Col md={4} key={option.id}>
-          <OrderOption {...option} currentValue={props.options[option.name]}/>
+          <OrderOption {...option}
+            currentValue={props.options[option.id]}
+            setOrderOption={props.setOrderOption}
+          />
         </Col>
       ))}
       <Col xs={12}>
-        <PageTitle text='Trip options' />
         <OrderSummary tripCost={props.tripCost} options={props.options} />
       </Col>
     </Row>
@@ -26,6 +29,8 @@ const OrderForm = props => (
 OrderForm.propTypes = {
   tripCost: PropTypes.string,
   options: PropTypes.object,
+  currentValue: PropTypes.string,
+  setOrderOption: PropTypes.func,
 };
 
 export default OrderForm;

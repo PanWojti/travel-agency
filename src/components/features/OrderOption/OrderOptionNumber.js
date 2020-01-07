@@ -1,14 +1,28 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 //import PageTitle from '../../common/PageTitle/PageTitle.js';
-//import styles from './OrderOptionCheckboxes.scss';
-//import {Grid, Row, Col} from 'react-flexbox-grid';
+import styles from './OrderOption.scss';
+import {formatPrice} from '../../../utils/formatPrice';
 
-const OrderOptionNumber = () => (
-  <div >
-    OrderOptionNumber
+const OrderOptionNumber = ({currentValue, setOptionValue, limits, price}) => (
+  <div className={styles.number}>
+    <input
+      type='number'
+      className={styles.inputSmall}
+      value={currentValue}
+      min={limits.min}
+      max={limits.max}
+      onChange={event => setOptionValue(event.currentTarget.value)}
+    />
+    {formatPrice(price)}
   </div>
 );
 
+OrderOptionNumber.propTypes = {
+  currentValue: PropTypes.string,
+  setOptionValue: PropTypes.func,
+  limits: PropTypes.object,
+  price: PropTypes.string,
+};
 
 export default OrderOptionNumber;

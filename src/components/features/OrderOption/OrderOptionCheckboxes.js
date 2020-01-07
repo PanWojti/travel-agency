@@ -1,14 +1,44 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 //import PageTitle from '../../common/PageTitle/PageTitle.js';
-//import styles from './OrderOptionCheckboxes.scss';
-//import {Grid, Row, Col} from 'react-flexbox-grid';
+import styles from './OrderOption.scss';
+import {formatPrice} from '../../../utils/formatPrice';
 
-const OrderOptionCheckboxes = () => (
-  <div >
-    OrderOptionCheckboxes
+const newValueSet = (currentValue, id, checked) => {
+  if(checked){
+    return [
+      ...currentValue,
+      id,
+    ];
+  } else {
+    return currentValue.filter(value => value != id);
+  }
+};
+
+const OrderOptionCheckboxes = ({values, currentValue, setOptionValue}) => (
+  <div className={styles.checkboxes}>
+    {values.map(value =>
+      (<label
+        className={value.id === currentValue ? styles.iconActive : styles.icon}
+        key={value.id}
+        onClick={() => setOptionValue(value.id)}
+      >
+        <input
+          type='checkbox'
+          value={value.id}
+          checked={currentValue.includes(value.id) ? true : false}
+          onChange={event => setOptionValue(newValueSet(currentValue, value.id, event.currentTarget.checked))}
+        />
+        {value.name} ({formatPrice(value.price)})
+      </label>)
+    )}
   </div>
 );
 
+OrderOptionCheckboxes.propTypes = {
+  values: PropTypes.array,
+  currentValue: PropTypes.array,
+  setOptionValue: PropTypes.func,
+};
 
 export default OrderOptionCheckboxes;
