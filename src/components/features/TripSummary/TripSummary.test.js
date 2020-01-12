@@ -33,4 +33,19 @@ describe('Component TripSummary', () => {
     const expectedTags = ['beach'];
     expect(() => shallow(<TripSummary tags={expectedTags} />)).toThrow();
   });
+  it('should render tags in correct order', () => {
+    const expectedTags = ['beach', 'mountains', 'jungle'];
+    const component = shallow(<TripSummary tags={expectedTags} />);
+    expect(component.find('.tags span').at(0).text()).toEqual(expectedTags[0]);
+    expect(component.find('.tags span').at(1).text()).toEqual(expectedTags[1]);
+    expect(component.find('.tags span').at(2).text()).toEqual(expectedTags[2]);
+    //console.log(component.debug());
+  });
+  it('should not render div with tags class if tags props is empty or false', () => {
+    const expectedTags = [];
+    const component = shallow(<TripSummary tags={expectedTags} />);
+
+    expect(component.find('.tags')).toHaveLength(0);
+    console.log(component.debug());
+  });
 });
