@@ -83,6 +83,23 @@
       "tripId": "5cc1d1014c75f672e46ef6d7",
       "countryCode": "TLS",
       "id": 6
+    },
+    {
+      "car-rental": "full",
+      "accommodation": "suite",
+      "features": [
+        "pool"
+      ],
+      "adults": "3",
+      "children": "2",
+      "name": "John Doe",
+      "contact": "123456789",
+      "start-date": "",
+      "totalCost": "$563,993",
+      "tripName": "Marvelous travel in fantastic Timor-Leste",
+      "tripId": "5cc1d1014c75f672e46ef6d7",
+      "countryCode": "TLS",
+      "id": 7
     }
   ]
 }

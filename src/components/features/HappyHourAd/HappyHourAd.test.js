@@ -69,7 +69,8 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
 
     const component = shallow(<HappyHourAd {...mockProps} />);
     const newTime = new Date();
-    newTime.setSeconds(newTime.getSeconds() + delaySeconds);
+    console.log(newTime.getSeconds(), delaySeconds);
+    newTime.setSeconds(newTime.getSeconds() + Number(delaySeconds));
     global.Date = mockDate(newTime.getTime());
     /*Accelerate the flow of time*/
     jest.advanceTimersByTime(delaySeconds * 1000);
@@ -83,7 +84,7 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
 };
 
 describe('Component HappyHourAd with mocked Date and delay', () => {
-  checkDescriptionAfterTime('11:57:58', 2, '120');
+  checkDescriptionAfterTime('11:57:58', '2', '120');
   checkDescriptionAfterTime('11:59:58', 1, '1');
   checkDescriptionAfterTime('13:00:00', 60 * 60 , 22 * 60 * 60 + '');
 });
